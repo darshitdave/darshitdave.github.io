@@ -45,20 +45,74 @@
       opacity: 0.55;
     }
 
-    /* ── NAV ── */
+    /*─ NAV ─*/
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      height: 58px;
-      padding: 0 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(244,244,240,0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 1000;
+        padding: 0 2.5rem;
+        background: rgba(244,244,240,0.96);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
     }
+
+    .nav-inner {
+        height: 58px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Hamburger button */
+    .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px; height: 36px;
+        background: none; border: none;
+        cursor: pointer; padding: 4px;
+        z-index: 1001;
+    }
+
+    .nav-hamburger span {
+        display: block;
+        width: 22px; height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav-drawer {
+        display: none;
+        flex-direction: column;
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 0 1rem;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+        color: var(--text-mid);
+        text-decoration: none;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--border);
+        transition: color 0.2s, padding-left 0.2s;
+        display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .nav-drawer a::before { content: '//'; color: var(--muted); font-size: 0.65rem; }
+    .nav-drawer a:hover { color: var(--accent); padding-left: 0.5rem; }
+    .nav-drawer a:last-child { border-bottom: none; }
 
     nav::after {
       content: '';
@@ -104,7 +158,7 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
+    /*  HERO  */
     #hero {
       position: relative; z-index: 1;
       min-height: 100vh;
@@ -231,7 +285,7 @@
       background: var(--accent-light);
     }
 
-    /* ── SECTIONS ── */
+    /*  SECTIONS  */
     section { position: relative; z-index: 1; padding: 6rem 2.5rem; }
 
     .section-inner { max-width: 880px; margin: 0 auto; }
@@ -258,7 +312,7 @@
       background: linear-gradient(90deg, var(--border-dark), transparent);
     }
 
-    /* ── ABOUT ── */
+    /*  ABOUT  */
     #about { border-top: 1px solid var(--border); }
 
     .about-grid {
@@ -329,7 +383,7 @@
       color: var(--muted); text-transform: uppercase; margin-top: 0.15rem;
     }
 
-    /* ── SKILLS ── */
+    /*  SKILLS  */
     #skills { background: var(--surface); border-top: 1px solid var(--border); }
 
     .skills-grid {
@@ -382,7 +436,7 @@
       background: var(--accent-light);
     }
 
-    /* ── PROJECTS ── */
+    /*  PROJECTS  */
     #projects { border-top: 1px solid var(--border); }
 
     .projects-grid {
@@ -486,7 +540,7 @@
 
     .p-tag { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; }
 
-    /* ── CONTACT ── */
+    /*  CONTACT  */
     #contact { border-top: 1px solid var(--border); background: var(--surface); }
 
     .contact-box {
@@ -532,7 +586,7 @@
       display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
     }
 
-    /* ── FOOTER ── */
+    /*  FOOTER  */
     footer {
       border-top: 1px solid var(--border);
       padding: 1.25rem 2.5rem;
@@ -545,7 +599,7 @@
     footer span { color: var(--accent); font-weight: 600; }
     .footer-right { font-size: 0.58rem; color: var(--border-dark); letter-spacing: 0.12em; }
 
-    /* ── ANIMATIONS ── */
+    /*  ANIMATIONS  */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -573,16 +627,18 @@
 
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
+    /*  RESPONSIVE  */
     @media (max-width: 720px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .contact-box { padding: 2.5rem 1.5rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .hero-decor { display: none; }
-      .nav-status { display: none; }
-      .nav-links { gap: 1.25rem; }
-      section { padding: 4.5rem 1.25rem; }
+        nav { padding: 0 1.25rem; }
+        .nav-status { display: none; }
+        .nav-links { display: none; }        
+        .nav-hamburger { display: flex; }   
+        .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        .projects-grid { grid-template-columns: 1fr; }
+        .contact-box { padding: 2.5rem 1.5rem; }
+        footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        .hero-decor { display: none; }
+        section { padding: 4.5rem 1.25rem; }
     }
 
     ::-webkit-scrollbar { width: 4px; }
@@ -596,195 +652,207 @@
 <div id="app">
 
   <!-- NAV -->
-  <nav>
-    <div class="nav-logo">
-      <span class="prompt">~/</span>darshit.dave
-    </div>
-    <div class="nav-status">
-      <div class="status-dot"></div>
-      available
-    </div>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-decor"></div>
-    <div class="hero-inner">
-      <div class="terminal-prompt">
-        <span class="tp-path">~/portfolio</span>
-        <span style="color:var(--muted)">$</span>
-        <span class="tp-cmd">whoami</span>
-        <span class="tp-cursor"></span>
-      </div>
-      <h1 class="hero-name">
-        <span class="hn-solid">Darshit</span>
-        <span class="hn-outline">Dave.</span>
-      </h1>
-      <div class="hero-role">
-        <div class="hr-line"></div>
-        Full Stack Developer
-        <div class="hr-line" style="background: linear-gradient(90deg, var(--accent), transparent)"></div>
-      </div>
-      <p class="hero-desc">
-        Designing and building scalable web applications from robust backend APIs to intuitive, user-focused interfaces.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">
-          <i class="fa-solid fa-code"></i>view_projects()
-        </a>
-        <a href="#contact" class="btn btn-ghost">
-          <i class="fa-solid fa-terminal"></i>get_in_touch()
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-inner">
-      <div class="section-header">
-        <span class="section-num">01.</span>
-        <h2 class="section-title">About</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="about-grid">
-        <div class="code-block reveal">
-          <div class="code-bar">
-            <div class="cd cd-r"></div>
-            <div class="cd cd-y"></div>
-            <div class="cd cd-g"></div>
-            <span class="code-filename">about.json</span>
-          </div>
-          <div class="code-content">
-            <div><span class="c-purple">const</span> <span class="c-blue">developer</span> <span class="c-dim">=</span> <span class="c-dim">{</span></div>
-            <div>&nbsp;&nbsp;<span class="c-yellow">name</span><span class="c-dim">:</span>  <span class="c-orange">"Darshit Dave"</span><span class="c-dim">,</span></div>
-            <div>&nbsp;&nbsp;<span class="c-yellow">role</span><span class="c-dim">:</span>  <span class="c-orange">"Full Stack Developer"</span><span class="c-dim">,</span></div>
-            <div>&nbsp;&nbsp;<span class="c-yellow">focus</span><span class="c-dim">: [</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"Scalable Web Platforms"</span><span class="c-dim">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"API Design & Integrations"</span><span class="c-dim">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"AI-driven Solutions"</span></div>
-            <div>&nbsp;&nbsp;<span class="c-dim">],</span></div>
-            <div>&nbsp;&nbsp;<span class="c-yellow">strengths</span><span class="c-dim">: [</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"Maintainable system architecture"</span><span class="c-dim">,</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"End-to-end delivery"</span></div>
-            <div>&nbsp;&nbsp;<span class="c-dim">],</span></div>
-            <div>&nbsp;&nbsp;<span class="c-yellow">openToWork</span><span class="c-dim">:</span> <span class="c-green">true</span></div>
-            <div><span class="c-dim">};</span></div>
-          </div>
-        </div>
-        <div class="stat-grid reveal">
-          <div class="stat-item">
-            <div class="stat-num">{{ yearsExperience }}+</div>
-            <div class="stat-label">Years of experience</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">{{ projects.length }}</div>
-            <div class="stat-label">GitHub projects</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">∞</div>
-            <div class="stat-label">Curiosity to learn</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-inner">
-      <div class="section-header">
-        <span class="section-num">02.</span>
-        <h2 class="section-title">Tech Stack</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category reveal" v-for="cat in skills" :key="cat.name">
-          <div class="skill-cat-title">
-            <i :class="cat.icon"></i>{{ cat.name }}
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag" v-for="s in cat.items" :key="s">{{ s }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-inner">
-      <div class="section-header">
-        <span class="section-num">03.</span>
-        <h2 class="section-title">Projects</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card reveal" v-for="(p, i) in projects" :key="p.name">
-          <div class="project-header">
-            <div class="p-header-left">
-              <div class="p-icon"><i :class="p.icon"></i></div>
-              <span class="p-num">PROJECT_{{ String(i+1).padStart(2,'0') }}</span>
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo">
+            <span class="prompt">~/</span>darshit.dave
             </div>
-            <a :href="p.url" target="_blank" rel="noopener" class="p-github-link">
-              <i class="fa-brands fa-github"></i>
-            </a>
-          </div>
-          <div class="project-body">
-            <h3 class="project-title">{{ p.name }}</h3>
-            <p class="project-desc">{{ p.desc }}</p>
-            <div class="project-tech">
-              <span class="tech-pill" v-for="t in p.tech" :key="t">{{ t }}</span>
+            <div class="nav-status">
+            <div class="status-dot"></div>
+            available_for_work
             </div>
-          </div>
-          <div class="project-footer">
-            <a :href="p.url" target="_blank" rel="noopener" class="p-link">
-              View Source <i class="fa-solid fa-arrow-right"></i>
+            <ul class="nav-links">
+            <li><a href="#about">about</a></li>
+            <li><a href="#skills">skills</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#contact">contact</a></li>
+            </ul>
+            <button class="nav-hamburger" @click="menuOpen = !menuOpen" :class="{ open: menuOpen }">
+            <span></span><span></span><span></span>
+            </button>
+        </div>
+        <!-- Mobile drawer -->
+        <div class="nav-drawer" :class="{ open: menuOpen }">
+            <a href="#about"    @click="menuOpen = false">about</a>
+            <a href="#skills"   @click="menuOpen = false">skills</a>
+            <a href="#projects" @click="menuOpen = false">projects</a>
+            <a href="#contact"  @click="menuOpen = false">contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+            <div class="hero-decor"></div>
+            <div class="hero-inner">
+            <div class="terminal-prompt">
+                <span class="tp-path">~/portfolio</span>
+                <span style="color:var(--muted)">$</span>
+                <span class="tp-cmd">whoami</span>
+                <span class="tp-cursor"></span>
+            </div>
+            <h1 class="hero-name">
+                <span class="hn-solid">Darshit</span>
+                <span class="hn-outline">Dave.</span>
+            </h1>
+            <div class="hero-role">
+                <div class="hr-line"></div>
+                Full Stack Developer
+                <div class="hr-line" style="background: linear-gradient(90deg, var(--accent), transparent)"></div>
+            </div>
+            <p class="hero-desc">
+                Designing and building scalable web applications from robust backend APIs to intuitive, user-focused interfaces.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">
+                <i class="fa-solid fa-code"></i>view_projects()
+                </a>
+                <a href="#contact" class="btn btn-ghost">
+                <i class="fa-solid fa-terminal"></i>get_in_touch()
+                </a>
+            </div>
+            </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+            <div class="section-inner">
+            <div class="section-header">
+                <span class="section-num">01.</span>
+                <h2 class="section-title">About</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="code-block reveal">
+                <div class="code-bar">
+                    <div class="cd cd-r"></div>
+                    <div class="cd cd-y"></div>
+                    <div class="cd cd-g"></div>
+                    <span class="code-filename">about.json</span>
+                </div>
+                <div class="code-content">
+                    <div><span class="c-purple">const</span> <span class="c-blue">developer</span> <span class="c-dim">=</span> <span class="c-dim">{</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-yellow">name</span><span class="c-dim">:</span>  <span class="c-orange">"Darshit Dave"</span><span class="c-dim">,</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-yellow">role</span><span class="c-dim">:</span>  <span class="c-orange">"Full Stack Developer"</span><span class="c-dim">,</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-yellow">focus</span><span class="c-dim">: [</span></div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"Scalable Web Platforms"</span><span class="c-dim">,</span></div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"API Design & Integrations"</span><span class="c-dim">,</span></div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"AI-driven Solutions"</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-dim">],</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-yellow">strengths</span><span class="c-dim">: [</span></div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"Maintainable system architecture"</span><span class="c-dim">,</span></div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-orange">"End-to-end delivery"</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-dim">],</span></div>
+                    <div>&nbsp;&nbsp;<span class="c-yellow">openToWork</span><span class="c-dim">:</span> <span class="c-green">true</span></div>
+                    <div><span class="c-dim">};</span></div>
+                </div>
+                </div>
+                <div class="stat-grid reveal">
+                <div class="stat-item">
+                    <div class="stat-num">{{ yearsExperience }}+</div>
+                    <div class="stat-label">Years of experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">{{ projects.length }}</div>
+                    <div class="stat-label">GitHub projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">∞</div>
+                    <div class="stat-label">Curiosity to learn</div>
+                </div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-inner">
+        <div class="section-header">
+            <span class="section-num">02.</span>
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category reveal" v-for="cat in skills" :key="cat.name">
+            <div class="skill-cat-title">
+                <i :class="cat.icon"></i>{{ cat.name }}
+            </div>
+            <div class="skill-tags">
+                <span class="skill-tag" v-for="s in cat.items" :key="s">{{ s }}</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-inner">
+        <div class="section-header">
+            <span class="section-num">03.</span>
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card reveal" v-for="(p, i) in projects" :key="p.name">
+            <div class="project-header">
+                <div class="p-header-left">
+                <div class="p-icon"><i :class="p.icon"></i></div>
+                <span class="p-num">PROJECT_{{ String(i+1).padStart(2,'0') }}</span>
+                </div>
+                <a :href="p.url" target="_blank" rel="noopener" class="p-github-link">
+                <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+            <div class="project-body">
+                <h3 class="project-title">{{ p.name }}</h3>
+                <p class="project-desc">{{ p.desc }}</p>
+                <div class="project-tech">
+                <span class="tech-pill" v-for="t in p.tech" :key="t">{{ t }}</span>
+                </div>
+            </div>
+            <div class="project-footer">
+                <a :href="p.url" target="_blank" rel="noopener" class="p-link">
+                View Source <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <span class="p-tag">github.com</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-inner">
+        <div class="section-header">
+            <span class="section-num">04.</span>
+            <h2 class="section-title">Contact</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-box reveal">
+            <h2 class="contact-headline">Let's<br/>Connect.</h2>
+            <p class="contact-sub">
+            Open to full-time roles, contracts &amp; collaborations.
+            Reach out — I respond fast.
+            </p>
+            <div class="contact-links">
+            <a href="https://linkedin.com/in/darshit-dave" target="_blank" rel="noopener" class="btn btn-primary">
+                <i class="fa-brands fa-linkedin"></i>linkedin_profile()
             </a>
-            <span class="p-tag">github.com</span>
-          </div>
+            <a href="https://github.com/darshitdave" target="_blank" rel="noopener" class="btn btn-ghost">
+                <i class="fa-brands fa-github"></i>github_profile()
+            </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-inner">
-      <div class="section-header">
-        <span class="section-num">04.</span>
-        <h2 class="section-title">Contact</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="contact-box reveal">
-        <h2 class="contact-headline">Let's<br/>Connect.</h2>
-        <p class="contact-sub">
-          Open to full-time roles, contracts &amp; collaborations.
-          Reach out — I respond fast.
-        </p>
-        <div class="contact-links">
-          <a href="https://linkedin.com/in/darshit-dave" target="_blank" rel="noopener" class="btn btn-primary">
-            <i class="fa-brands fa-linkedin"></i>linkedin_profile()
-          </a>
-          <a href="https://github.com/darshitdave" target="_blank" rel="noopener" class="btn btn-ghost">
-            <i class="fa-brands fa-github"></i>github_profile()
-          </a>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>Built by <span>Darshit Dave</span> · {{ new Date().getFullYear() }}</p>
-    <div class="footer-right">v1.0.0 // PORTFOLIO</div>
-  </footer>
+    <!-- FOOTER -->
+    <footer>
+        <p>Built by <span>Darshit Dave</span> · {{ new Date().getFullYear() }}</p>
+        <div class="footer-right">v1.0.0 // PORTFOLIO</div>
+    </footer>
 
 </div>
 
@@ -794,51 +862,52 @@ const { createApp } = Vue;
 createApp({
     computed: {
         yearsExperience() {
-        const start = new Date(2018, 5, 1); // June 2018
-        const now = new Date();
-        return Math.floor((now - start) / (1000 * 60 * 60 * 24 * 365.25));
+            const start = new Date(2018, 5, 1); // June 2018
+            const now = new Date();
+            return Math.floor((now - start) / (1000 * 60 * 60 * 24 * 365.25));
         }
     },
     data() {
         return {
-        skills: [
-            {
-            name: 'Frontend',
-            icon: 'fa-solid fa-desktop',
-            items: ['HTML5', 'CSS3', 'JavaScript', 'Vue.js', 'Bootstrap', 'jQuery']
-            },
-            {
-            name: 'Backend',
-            icon: 'fa-solid fa-server',
-            items: ['PHP', 'Laravel', 'Python', 'LangChain', 'REST APIs']
-            },
-            {
-            name: 'Database',
-            icon: 'fa-solid fa-database',
-            items: ['MySQL', 'PostgreSQL', 'Database Design', 'Migrations']
-            },
-            {
-            name: 'Tools',
-            icon: 'fa-solid fa-wrench',
-            items: ['Git', 'GitHub', 'Linux', 'VS Code', 'npm', 'Composer']
-            }
-        ],
-        projects: [
-            {
-            name: 'News Research Tool',
-            icon: 'fa-solid fa-newspaper',
-            desc: 'The News Research Tool allows users to analyze news articles by providing URLs and asking questions to extract meaningful insights.',
-            tech: ['Python', 'LangChain', 'OpenAI', 'FAISS', 'Streamlit'],
-            url: 'https://github.com/darshitdave/news-research-tool'
-            },
-            {
-            name: 'Pharma Sales Webapp',
-            icon: 'fa-solid fa-pills',
-            desc: 'A web-based Pharma Sales Management System built to manage medicine sales, customers, invoices, and reports for pharmaceutical businesses.',
-            tech: ['PHP', 'Laravel', 'MySQL', 'Bootstrap', 'jQuery'],
-            url: 'https://github.com/darshitdave/pharma-sales-webapp'
-            }
-        ]
+            menuOpen: false,
+            skills: [
+                {
+                    name: 'Frontend',
+                    icon: 'fa-solid fa-desktop',
+                    items: ['HTML5', 'CSS3', 'JavaScript', 'Vue.js', 'Bootstrap', 'jQuery']
+                },
+                {
+                    name: 'Backend',
+                    icon: 'fa-solid fa-server',
+                    items: ['PHP', 'Laravel', 'Python', 'LangChain', 'REST APIs']
+                },
+                {
+                    name: 'Database',
+                    icon: 'fa-solid fa-database',
+                    items: ['MySQL', 'PostgreSQL', 'Database Design', 'Migrations']
+                },
+                {
+                    name: 'Tools',
+                    icon: 'fa-solid fa-wrench',
+                    items: ['Git', 'GitHub', 'Linux', 'VS Code', 'npm', 'Composer']
+                }
+            ],
+            projects: [
+                {
+                    name: 'News Research Tool',
+                    icon: 'fa-solid fa-newspaper',
+                    desc: 'The News Research Tool allows users to analyze news articles by providing URLs and asking questions to extract meaningful insights.',
+                    tech: ['Python', 'LangChain', 'OpenAI', 'FAISS', 'Streamlit'],
+                    url: 'https://github.com/darshitdave/news-research-tool'
+                },
+                {
+                    name: 'Pharma Sales Webapp',
+                    icon: 'fa-solid fa-pills',
+                    desc: 'A web-based Pharma Sales Management System built to manage medicine sales, customers, invoices, and reports for pharmaceutical businesses.',
+                    tech: ['PHP', 'Laravel', 'MySQL', 'Bootstrap', 'jQuery'],
+                    url: 'https://github.com/darshitdave/pharma-sales-webapp'
+                }
+            ]
         };
     },
     mounted() {
@@ -852,4 +921,3 @@ createApp({
 </script>
 </body>
 </html>
-
