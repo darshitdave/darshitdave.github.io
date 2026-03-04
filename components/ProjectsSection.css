@@ -1,0 +1,107 @@
+/* ── PROJECTS SECTION ── */
+#projects { border-top: 1px solid var(--border); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(10,92,74,0.12);
+}
+
+.project-header {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.p-header-left {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+
+.p-icon {
+  width: 30px; height: 30px;
+  background: var(--accent-light);
+  border: 1.5px solid rgba(10,92,74,0.2);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; color: var(--accent);
+}
+
+.p-num {
+  font-size: 0.58rem; letter-spacing: 0.15em;
+  color: var(--muted); text-transform: uppercase;
+}
+
+.p-github-link {
+  color: var(--muted); font-size: 1.05rem;
+  transition: color 0.2s; text-decoration: none;
+}
+
+.p-github-link:hover { color: var(--accent); }
+
+.project-body { padding: 1.5rem; }
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 1.15rem;
+  letter-spacing: -0.02em; color: var(--text);
+  margin-bottom: 0.65rem;
+}
+
+.project-desc {
+  font-size: 0.78rem; color: var(--text-mid);
+  line-height: 1.9; margin-bottom: 1.4rem;
+}
+
+.project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.tech-pill {
+  font-size: 0.63rem; letter-spacing: 0.04em;
+  color: var(--text-mid);
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 0.22rem 0.65rem; border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.tech-pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.project-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface);
+}
+
+.p-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent);
+  text-decoration: none; font-weight: 600;
+  transition: gap 0.2s;
+}
+
+.p-link:hover { gap: 0.65rem; }
+
+.p-tag { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; }
+
+@media (max-width: 720px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}

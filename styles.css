@@ -1,0 +1,139 @@
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── CSS VARIABLES ── */
+:root {
+  --bg:           #f4f4f0;
+  --surface:      #eeeee9;
+  --card:         #ffffff;
+  --border:       #d8d8d0;
+  --border-dark:  #b0b0a4;
+  --accent:       #0a5c4a;
+  --accent-light: #e6f4f0;
+  --accent2:      #3b3bff;
+  --text:         #111110;
+  --text-mid:     #3a3a36;
+  --muted:        #888880;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* Dot grid background */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, #c8c8c0 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ── SHARED SECTION STYLES ── */
+section {
+  position: relative; z-index: 1;
+  padding: 6rem 2.5rem;
+}
+
+.section-inner { max-width: 880px; margin: 0 auto; }
+
+.section-header {
+  display: flex; align-items: baseline; gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.section-num {
+  font-size: 0.65rem; color: var(--accent);
+  font-weight: 700; letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: -0.03em; color: var(--text);
+}
+
+.section-line {
+  flex: 1; height: 1.5px;
+  background: linear-gradient(90deg, var(--border-dark), transparent);
+}
+
+/* ── SHARED BUTTON STYLES ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: 3px; transition: all 0.2s;
+  cursor: pointer; border: none;
+}
+
+.btn-primary {
+  background: var(--accent); color: #fff; font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #083d31;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10,92,74,0.25);
+}
+
+.btn-ghost {
+  background: transparent; color: var(--text);
+  border: 1.5px solid var(--border-dark);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SHARED ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(22,163,74,0.25); }
+  50% { box-shadow: 0 0 0 5px rgba(22,163,74,0.08); }
+}
+
+@keyframes introSpin {
+  from { transform: rotate(12deg); }
+  to   { transform: rotate(372deg); }
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::selection { background: rgba(10,92,74,0.15); color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  section { padding: 4.5rem 1.25rem; }
+}

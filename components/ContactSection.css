@@ -1,0 +1,52 @@
+/* ── CONTACT SECTION ── */
+#contact {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.contact-box {
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  padding: 4.5rem 3rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+.contact-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+
+.contact-eyebrow {
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.contact-eyebrow span { color: var(--accent); font-weight: 600; }
+
+.contact-headline {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  letter-spacing: -0.04em; line-height: 1.0;
+  color: var(--text); margin-bottom: 1rem;
+}
+
+.contact-sub {
+  color: var(--text-mid); font-size: 0.8rem;
+  line-height: 1.85; max-width: 360px;
+  margin: 0 auto 2.5rem;
+}
+
+.contact-links {
+  display: flex; gap: 1rem;
+  justify-content: center; flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .contact-box { padding: 2.5rem 1.5rem; }
+}

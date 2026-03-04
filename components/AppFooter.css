@@ -1,0 +1,16 @@
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 1;
+  background: var(--bg);
+}
+
+footer p { font-size: 0.63rem; color: var(--muted); letter-spacing: 0.06em; }
+footer span { color: var(--accent); font-weight: 600; }
+.footer-right { font-size: 0.58rem; color: var(--border-dark); letter-spacing: 0.12em; }
+
+@media (max-width: 720px) {
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
