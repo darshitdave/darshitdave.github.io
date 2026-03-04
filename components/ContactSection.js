@@ -17,9 +17,8 @@ export default {
         </div>
         <div class="contact-box reveal">
           <div class="contact-eyebrow">
-            // <span>open_to_opportunities</span>
           </div>
-          <h2 class="contact-headline">Let's Connect.<br/>Something.</h2>
+          <h2 class="contact-headline">Let's Connect.</h2>
           <p class="contact-sub">
             Open to full-time roles, contracts &amp; collaborations.
             Reach out, I respond fast.
